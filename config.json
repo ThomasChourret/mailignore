@@ -1,0 +1,8 @@
+{
+    "username": "", 
+    "password": "",
+    "imap_server": "imap.insa-toulouse.fr",
+    "port": 993,
+    "ignorefolder": "MAILALL"
+  }
+  
