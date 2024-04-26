@@ -36,7 +36,7 @@ def main():
     #print("Selected.")
     #print("Searching for unread messages...")
 
-    status, messages = imap.search(None, 'ALL')
+    status, messages = imap.search(None, 'UNSEEN')
     #print("Messages found.")
     #print("Processing messages...")
 
@@ -46,13 +46,6 @@ def main():
     for msg_id in messages[0].split():
         # Fetch the email using its ID
         status, data = imap.fetch(msg_id, '(RFC822)')
-        
-        #check is the mail is already read
-        status, flags = imap.fetch(msg_id, '(FLAGS)')
-
-        seen = False
-        if b'\\Seen' in flags[0]:
-            seen = True
 
         # Parse the email content
         raw_email = data[0][1]
@@ -82,7 +75,7 @@ def main():
             #print(f"Moved email from {from_email} with subject {subject} to MAILALL.")
             imap.store(msg_id, '-FLAGS', '\\Seen')
             nb += 1
-        elif seen == True:
+        else:
             #remark the email as not read
             imap.store(msg_id, '-FLAGS', '\\Seen')
 
